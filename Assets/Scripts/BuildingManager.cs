@@ -25,8 +25,15 @@ public class BuildingManager : MonoBehaviour
 
     [SerializeField] private Toggle gridToggle;
 
+    [SerializeField] private Transform _rayOrigin;
+    [SerializeField] private float _rayDistance;
+    public bool isThirdPersonCam;
+    private Camera _camera;
+
     private void Awake()
     {
+        _camera = Camera.main;
+        isThirdPersonCam = true;
         if (Instance == null)
             Instance = this;
     }
@@ -60,9 +67,10 @@ public class BuildingManager : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hit, 1000, layerMask))
+        Ray ray = isThirdPersonCam ? new Ray(_rayOrigin.position, _camera.transform.forward * _rayDistance) : _camera.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out hit, (isThirdPersonCam ? _rayDistance : 1000), layerMask))
         {
             pos = hit.point;
         }

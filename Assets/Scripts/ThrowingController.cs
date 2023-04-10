@@ -29,7 +29,7 @@ public class ThrowingController : MonoBehaviour
     Rigidbody rb;
 
     [SerializeField] private GameObject throwableObject;
-    private LayerMask BottleCollisionMask;
+    [SerializeField] private LayerMask BottleCollisionMask;
 
     [SerializeField] private PlayerController playerController;
 
