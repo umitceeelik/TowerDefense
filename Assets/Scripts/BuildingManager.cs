@@ -15,7 +15,8 @@ public class BuildingManager : MonoBehaviour
     private Vector3 pos;
 
     private RaycastHit hit;
-    [SerializeField] private LayerMask layerMask;
+    [SerializeField] public LayerMask placementLayermask;
+    [SerializeField] public LayerMask selectingLayermask;
 
     public float rotateAmount;
 
@@ -25,10 +26,10 @@ public class BuildingManager : MonoBehaviour
 
     [SerializeField] private Toggle gridToggle;
 
-    [SerializeField] private Transform _rayOrigin;
-    [SerializeField] private float _rayDistance;
+    [SerializeField] public Transform _rayOrigin;
+    [SerializeField] public float _rayDistance;
     public bool isThirdPersonCam;
-    private Camera _camera;
+    public Camera _camera;
 
     private void Awake()
     {
@@ -56,7 +57,7 @@ public class BuildingManager : MonoBehaviour
             {
                 PlaceObject();
             }
-            if (Input.GetKeyDown(KeyCode.R))
+            if (Input.GetKeyDown(KeyCode.T))
             {
                 RotateObject();
             }
@@ -67,10 +68,9 @@ public class BuildingManager : MonoBehaviour
     }
     private void FixedUpdate()
     {
-
         Ray ray = isThirdPersonCam ? new Ray(_rayOrigin.position, _camera.transform.forward * _rayDistance) : _camera.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hit, (isThirdPersonCam ? _rayDistance : 1000), layerMask))
+        if (Physics.Raycast(ray, out hit, (isThirdPersonCam ? _rayDistance : 1000), placementLayermask))
         {
             pos = hit.point;
         }
@@ -92,6 +92,7 @@ public class BuildingManager : MonoBehaviour
         pendingObject = Instantiate(objects[index], pos, transform.rotation);
     }
 
+    
     private void UpdateMaterials()
     {
         if (canPlace)

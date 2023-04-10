@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
+using static UnityEditor.PlayerSettings;
 
 public class Selector : MonoBehaviour
 {
@@ -22,36 +23,66 @@ public class Selector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
+        // if (Input.GetMouseButtonDown(0))
+        // {
+        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, 1000))
+        Ray ray = buildingManager.isThirdPersonCam ?
+            new Ray(buildingManager._rayOrigin.position, buildingManager._camera.transform.forward * buildingManager._rayDistance)
+            : buildingManager._camera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, (buildingManager.isThirdPersonCam ? buildingManager._rayDistance : 1000), buildingManager.selectingLayermask) && buildingManager.pendingObject is null)
+        {
+            if (hit.collider.gameObject.CompareTag("Object") && selectedObject == null)
             {
-                if (hit.collider.gameObject.CompareTag("Object"))
-                {
-                    Select(hit.collider.gameObject);
-                }
+                Select(hit.collider.gameObject);
+            }
+            /*else if (hit.collider.gameObject is null && selectedObject != null)
+            {
+                Deselect();
+            }*/
+            else if (hit.collider.gameObject.CompareTag("Object") && selectedObject == hit.collider.gameObject && Input.GetKeyDown(KeyCode.R))
+            {
+                Move();
+            }
+            else if (Input.GetKeyDown(KeyCode.E) && selectedObject == hit.collider.gameObject)
+            {
+                Delete();
             }
         }
 
+        if (Physics.Raycast(ray, out hit, (buildingManager.isThirdPersonCam ? buildingManager._rayDistance : 1000)) && selectedObject != null && buildingManager.pendingObject is null)
+        {
+            if (hit.collider.gameObject is null || hit.collider.gameObject != selectedObject &&  selectedObject != null)
+            {
+                Deselect();
+            }
+        }
+
+
+
+
+        //}
+        /*
         if (Input.GetMouseButtonDown(1) && selectedObject != null)
         {
             Deselect();
         }
+        */
     }
 
     private void Select(GameObject go)
     {
         if (go == selectedObject) return;
-        if (selectedObject != null) Deselect();
-        
+        //if (selectedObject != null) Deselect();
+
         Outline outline = go.GetComponent<Outline>();
 
         if (outline == null)
             go.AddComponent<Outline>();
-        else 
+        else
             outline.enabled = true;
 
         objNameText.text = go.name;
@@ -68,7 +99,8 @@ public class Selector : MonoBehaviour
 
     public void Move()
     {
-        buildingManager.pendingObject = selectedObject;
+        if (buildingManager.pendingObject is null)
+            buildingManager.pendingObject = selectedObject;
     }
 
     public void Delete()
