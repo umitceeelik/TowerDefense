@@ -39,10 +39,6 @@ public class Selector : MonoBehaviour
             {
                 Select(hit.collider.gameObject);
             }
-            /*else if (hit.collider.gameObject is null && selectedObject != null)
-            {
-                Deselect();
-            }*/
             else if (hit.collider.gameObject.CompareTag("Object") && selectedObject == hit.collider.gameObject && Input.GetKeyDown(KeyCode.R))
             {
                 Move();
@@ -60,9 +56,6 @@ public class Selector : MonoBehaviour
                 Deselect();
             }
         }
-
-
-
 
         //}
         /*
