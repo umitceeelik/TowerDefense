@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4888584834316751623}
   - component: {fileID: 5601831454448051093}
   m_Layer: 8
-  m_Name: BasicEnemy
+  m_Name: HorseMan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
