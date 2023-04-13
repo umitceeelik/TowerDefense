@@ -62,8 +62,10 @@ public class BuildingManager : MonoBehaviour
                 RotateObject();
             }
 
-            UpdateMaterials();
-
+            if (pendingObject != null)
+            {
+                UpdateMaterials();
+            }
         }    
     }
     private void FixedUpdate()
