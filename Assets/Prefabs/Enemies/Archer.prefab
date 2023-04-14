@@ -74,7 +74,6 @@ MonoBehaviour:
   Target: {fileID: 0}
   UpdateRate: 0.1
   Animator: {fileID: 6472461813776424878}
-  stopSetDestination: 0
 --- !u!136 &6472461813319230000
 CapsuleCollider:
   m_ObjectHideFlags: 0

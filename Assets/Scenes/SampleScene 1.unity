@@ -3475,7 +3475,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.08276958, y: -0.03043363, z: 0.0025288395, w: 0.9961007}
-  m_LocalPosition: {x: 2.9326875, y: 3.01288, z: -3.3410075}
+  m_LocalPosition: {x: 2.9083138, y: 3.01288, z: -3.3424985}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6878,7 +6878,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3250194261959458169, guid: e210948372bcd9543b498bba3789e469, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.9326875
+      value: 2.9083138
       objectReference: {fileID: 0}
     - target: {fileID: 3250194261959458169, guid: e210948372bcd9543b498bba3789e469, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6886,7 +6886,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3250194261959458169, guid: e210948372bcd9543b498bba3789e469, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.3410075
+      value: -3.3424985
       objectReference: {fileID: 0}
     - target: {fileID: 3250194261959458169, guid: e210948372bcd9543b498bba3789e469, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8257,7 +8257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 2135988745}
-  numberOfEnemiesToSpawn: 20
+  numberOfEnemiesToSpawn: 5
   spawnDelay: 1
   enemyPrefabs:
   - {fileID: 6472461813319229996, guid: 22f7f5f06c81cde43a5d2dc4e8aa48cb, type: 3}
@@ -8785,7 +8785,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d944206cb1bd8b04790258cc2ab39d02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 500
+  Health: 200
 --- !u!54 &2135988751
 Rigidbody:
   m_ObjectHideFlags: 0

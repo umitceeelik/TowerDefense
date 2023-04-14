@@ -17,11 +17,16 @@ public class EnemyMovement : MonoBehaviour
     //private const string IsAttacking = "IsAttacking";
 
     private Coroutine FollowCoroutine;
-    public bool stopSetDestination;
+    
+    private Transform targetTransform;
+    private bool isStopped;
+    public float movingTargetUpdateRate;
+    //public bool stopSetDestination;
 
     private void Awake()
     {
-        stopSetDestination = false;
+        isStopped = false;
+        //stopSetDestination = false;
         Agent = GetComponent<NavMeshAgent>();
     }
 
@@ -34,6 +39,9 @@ public class EnemyMovement : MonoBehaviour
     {
         if (FollowCoroutine == null)
         {
+            targetTransform = Target.transform;
+            movingTargetUpdateRate = UpdateRate;
+            Debug.Log("StartedChasing");
             FollowCoroutine = StartCoroutine(FollowTarget());
         }
         else
@@ -58,28 +66,52 @@ public class EnemyMovement : MonoBehaviour
         //{
         //    StopAllCoroutines();
         //}
+
+        if (!Target.gameObject.activeSelf && !isStopped)
+        {
+            Debug.Log("stop");
+            UpdateRate = movingTargetUpdateRate;
+            StopCoroutine(FollowCoroutine);
+            FollowCoroutine = null;
+            Agent.isStopped = true;
+            isStopped = true;
+        }
+
+        if (Target.gameObject.activeSelf && isStopped)
+        {
+            Debug.Log("play again");
+            isStopped = false;
+            StartChasing();
+        }
     }
 
     private IEnumerator FollowTarget()
     {
+        if (targetTransform.position == Target.position)
+        {
+            UpdateRate *= 10000;
+        }
+
         WaitForSeconds Wait = new WaitForSeconds(UpdateRate);
         
         while (enabled && Target.gameObject.activeSelf)
         {
             Agent.SetDestination(Target.transform.position);
-            
-            //Debug.Log("aaa");
+            Agent.isStopped = false;
+            Debug.Log("aaa");
             yield return Wait;
         }
 
         if (!Target.gameObject.activeSelf)
         {
             Debug.Log("bb");
+            UpdateRate = movingTargetUpdateRate;
             Agent.Stop();
             yield return null;
         }
     }
 
+    /*
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject == Target)
@@ -94,5 +126,5 @@ public class EnemyMovement : MonoBehaviour
         {
             stopSetDestination = false;
         }
-    }
+    } */
 }

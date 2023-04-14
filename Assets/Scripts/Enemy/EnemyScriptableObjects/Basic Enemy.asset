@@ -16,6 +16,7 @@ MonoBehaviour:
   AttackDelay: 1
   Damage: 15
   AttackRadius: 1.5
+  IsRanged: 0
   AIUpdateInterval: 0.1
   Acceleration: 15
   Angularspeed: 120
@@ -23,7 +24,7 @@ MonoBehaviour:
   AvoidancePriority: 50
   BaseOffset: 0
   Height: 2.5
-  ObstacleAvoidanceType: 3
+  ObstacleAvoidanceType: 2
   Radius: 0.6
   Speed: 6
   StoppingDistance: 1.7

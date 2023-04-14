@@ -24,7 +24,7 @@ MonoBehaviour:
   AvoidancePriority: 50
   BaseOffset: 0
   Height: 1.6
-  ObstacleAvoidanceType: 1
+  ObstacleAvoidanceType: 2
   Radius: 0.5
   Speed: 4
   StoppingDistance: 3

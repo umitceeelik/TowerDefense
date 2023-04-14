@@ -25,6 +25,8 @@ public class Enemy : PoolableObject, IDamageable
 
     private void OnAttack(IDamageable Target)
     {
+        Movement.UpdateRate = Movement.movingTargetUpdateRate;
+        Agent.Stop();
         Animator.SetTrigger(ATTACK_TRIGGER);
 
         if (LookCoroutine != null)
