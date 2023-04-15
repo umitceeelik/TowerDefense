@@ -18,9 +18,8 @@ public class RangedAttackRadius : AttackRadius
 
     public bool canAttack;
 
-    protected override void Awake()
+    public void CreateBulletPool()
     {
-        base.Awake();
         canAttack = false;
         BulletPool = ObjectPool.CreateInstance(BulletPrefab, Mathf.CeilToInt((1 / AttackDelay) * BulletPrefab.AutoDestroyTime));
     }
@@ -77,8 +76,6 @@ public class RangedAttackRadius : AttackRadius
         Agent.enabled = true;
         AttackCoroutine = null;
     }
-
-    
 
     private bool HasLineOfSightTo(Transform target)
     {

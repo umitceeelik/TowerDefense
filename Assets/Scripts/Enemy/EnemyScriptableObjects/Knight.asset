@@ -12,11 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fee2f37e3b471724880b4b335648d859, type: 3}
   m_Name: Knight
   m_EditorClassIdentifier: 
+  EnemyPrefab: {fileID: 5435177004290037428, guid: 98ff5160ab7c2f14fad98fa767f6cfd6, type: 3}
+  AttackConfiguration: {fileID: 11400000, guid: 8cbba4461d1aee648a0f0a85d082d4b2, type: 2}
   Health: 100
-  AttackDelay: 1
-  Damage: 10
-  AttackRadius: 1.5
-  IsRanged: 0
   AIUpdateInterval: 0.1
   Acceleration: 10
   Angularspeed: 120

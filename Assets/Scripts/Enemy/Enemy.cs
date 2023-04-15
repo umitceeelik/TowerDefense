@@ -12,7 +12,6 @@ public class Enemy : PoolableObject, IDamageable
     public Animator Animator;
     public EnemyMovement Movement;
     public NavMeshAgent Agent;
-    public EnemyScriptableObject EnemyScriptableObject;
     public int Health = 100;
 
     private Coroutine LookCoroutine;
@@ -53,11 +52,6 @@ public class Enemy : PoolableObject, IDamageable
         transform.rotation = lookRotation;
     }
 
-    public virtual void OnEnable()
-    {
-        SetupAgentFromConfiguration();
-    }
-
     public override void OnDisable()
     {
         base.OnDisable();
@@ -65,26 +59,7 @@ public class Enemy : PoolableObject, IDamageable
         Agent.enabled = false;
     }
 
-    public virtual void SetupAgentFromConfiguration()
-    {
-        Agent.acceleration = EnemyScriptableObject.Acceleration;
-        Agent.angularSpeed = EnemyScriptableObject.Angularspeed;
-        Agent.areaMask = EnemyScriptableObject.Areamask;
-        Agent.avoidancePriority = EnemyScriptableObject.AvoidancePriority;
-        Agent.baseOffset = EnemyScriptableObject.BaseOffset;
-        Agent.height = EnemyScriptableObject.Height;
-        Agent.obstacleAvoidanceType = EnemyScriptableObject.ObstacleAvoidanceType;
-        Agent.radius = EnemyScriptableObject.Radius;
-        Agent.speed = EnemyScriptableObject.Speed;
-        Agent.stoppingDistance = EnemyScriptableObject.StoppingDistance;
 
-        Movement.UpdateRate = EnemyScriptableObject.AIUpdateInterval;
-
-        Health = EnemyScriptableObject.Health;
-        AttackRadius.Collider.radius = EnemyScriptableObject.AttackRadius;
-        AttackRadius.AttackDelay = EnemyScriptableObject.AttackDelay;
-        AttackRadius.Damage = EnemyScriptableObject.Damage;
-    }
 
     public void TakeDamage(int damage)
     {
